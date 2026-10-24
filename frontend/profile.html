@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile & Security | CardioPredict</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body id="profile-view">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link">History</a></li>
+        <li><a href="model-performance.html" class="nav-link">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container"></div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 800px;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1>Account Profile & Security</h1>
+          <p class="text-muted" style="margin-bottom: 0;">Manage your personal clinical credentials and account security.</p>
+        </div>
+        <div>
+          <button id="profile-logout-btn" class="btn btn-danger btn-sm">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Account Info Header -->
+      <div class="card" style="margin-bottom: 2rem; padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-direction: row;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 700; flex-shrink: 0;">
+          👤
+        </div>
+        <div>
+          <h2 id="profile-header-name" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Clinician</h2>
+          <p id="profile-member-since" class="text-muted" style="margin-bottom: 0; font-size: 0.9rem;">Member</p>
+        </div>
+      </div>
+
+      <!-- Basic Profile Info Form -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <h3 class="card-title">Profile Information</h3>
+        </div>
+        <div class="card-body">
+          <form id="profile-form">
+            <div class="form-group">
+              <label class="form-label" for="profile-name-input">Full Name</label>
+              <input type="text" id="profile-name-input" name="name" class="form-control" required minlength="2">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profile-email-input">Email Address</label>
+              <input type="email" id="profile-email-input" name="email" class="form-control" disabled style="background-color: #f1f5f9; cursor: not-allowed;">
+              <small class="form-helper">Email address serves as unique account identifier and cannot be modified directly.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Save Profile Changes
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Change Password Form -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Change Password</h3>
+        </div>
+        <div class="card-body">
+          <form id="password-form">
+            <div class="form-group">
+              <label class="form-label" for="current_password">Current Password</label>
+              <input type="password" id="current_password" name="current_password" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new_password">New Password</label>
+              <input type="password" id="new_password" name="new_password" class="form-control" required minlength="8">
+              <small class="form-helper">Must be at least 8 characters with at least one letter and one number.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirm_new_password">Confirm New Password</label>
+              <input type="password" id="confirm_new_password" name="confirm_new_password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary">
+              Update Password
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> For research and educational purposes only. Does not replace physician diagnosis.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict.</div>
+        <div><a href="index.html" style="color: #94a3b8;">Home</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>

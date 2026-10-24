@@ -1,0 +1,108 @@
+{
+  "models_comparison": [
+    {
+      "model_name": "logistic_regression",
+      "accuracy": 0.8471,
+      "precision": 0.8768,
+      "recall": 0.7834,
+      "f1_score": 0.8245,
+      "roc_auc": 0.9025
+    },
+    {
+      "model_name": "random_forest",
+      "accuracy": 0.8055,
+      "precision": 0.8075,
+      "recall": 0.7644,
+      "f1_score": 0.78,
+      "roc_auc": 0.8951
+    },
+    {
+      "model_name": "svm",
+      "accuracy": 0.8139,
+      "precision": 0.8303,
+      "recall": 0.7648,
+      "f1_score": 0.7893,
+      "roc_auc": 0.8884
+    },
+    {
+      "model_name": "decision_tree",
+      "accuracy": 0.7273,
+      "precision": 0.7171,
+      "recall": 0.6743,
+      "f1_score": 0.6922,
+      "roc_auc": 0.7863
+    },
+    {
+      "model_name": "knn",
+      "accuracy": 0.8222,
+      "precision": 0.8232,
+      "recall": 0.7826,
+      "f1_score": 0.7989,
+      "roc_auc": 0.8712
+    },
+    {
+      "model_name": "stacking_ensemble",
+      "accuracy": 0.8263,
+      "precision": 0.8409,
+      "recall": 0.7826,
+      "f1_score": 0.8038,
+      "roc_auc": 0.8987
+    }
+  ],
+  "balancing_comparison": [
+    {
+      "technique": "Baseline (No Resampling)",
+      "accuracy": 0.8263,
+      "recall": 0.7826,
+      "f1_score": 0.8038,
+      "roc_auc": 0.8987
+    },
+    {
+      "technique": "SMOTE (Oversampling)",
+      "accuracy": 0.8221,
+      "recall": 0.7917,
+      "f1_score": 0.8013,
+      "roc_auc": 0.9014
+    },
+    {
+      "technique": "Random Undersampling",
+      "accuracy": 0.8263,
+      "recall": 0.783,
+      "f1_score": 0.8049,
+      "roc_auc": 0.9041
+    },
+    {
+      "technique": "Class Weighting (Cost-Sensitive)",
+      "accuracy": 0.8304,
+      "recall": 0.7917,
+      "f1_score": 0.8095,
+      "roc_auc": 0.9001
+    }
+  ],
+  "reduction_comparison": [
+    {
+      "technique": "Full Features (13 raw attributes)",
+      "components_or_features": 13,
+      "accuracy": 0.8263,
+      "recall": 0.7826,
+      "f1_score": 0.8038,
+      "roc_auc": 0.8987
+    },
+    {
+      "technique": "PCA (10 Principal Components)",
+      "components_or_features": 10,
+      "accuracy": 0.8057,
+      "recall": 0.783,
+      "f1_score": 0.785,
+      "roc_auc": 0.8929
+    },
+    {
+      "technique": "SelectKBest (ANOVA F-value Top 10)",
+      "components_or_features": 10,
+      "accuracy": 0.8181,
+      "recall": 0.7648,
+      "f1_score": 0.7934,
+      "roc_auc": 0.9031
+    }
+  ]
+}

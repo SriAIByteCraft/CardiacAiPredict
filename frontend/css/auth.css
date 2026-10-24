@@ -1,0 +1,61 @@
+/* ==========================================================================
+   HEART DISEASE PREDICTION SYSTEM - AUTHENTICATION STYLES (LOGIN & REGISTER)
+   ========================================================================== */
+
+.auth-wrapper {
+  min-height: calc(100vh - 18rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--light-surface);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.auth-header {
+  padding: 2.25rem 2rem 1.25rem;
+  text-align: center;
+}
+
+.auth-icon-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.auth-header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.auth-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.auth-body {
+  padding: 0 2rem 2rem;
+}
+
+.auth-footer-links {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}

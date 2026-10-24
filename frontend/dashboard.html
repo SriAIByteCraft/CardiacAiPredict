@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Dashboard | CardioPredict</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body id="dashboard-view">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link">History</a></li>
+        <li><a href="model-performance.html" class="nav-link">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container">
+        <!-- Injected via ui.js -->
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Welcome Header -->
+      <div class="dashboard-header">
+        <div class="dashboard-welcome">
+          <h1>Welcome, <span id="user-welcome-name" style="color: var(--primary);">Clinician</span></h1>
+          <p>Cardiovascular prediction dashboard & historical assessment monitor.</p>
+        </div>
+        <div>
+          <a href="predict.html" class="btn btn-primary btn-lg">
+            <span>+</span> Run New Patient Assessment
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Summary Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper kpi-blue">📊</div>
+          <div class="kpi-details">
+            <div class="kpi-label">TOTAL PREDICTIONS</div>
+            <div class="kpi-value" id="stat-total-predictions">0</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper kpi-red">⚠️</div>
+          <div class="kpi-details">
+            <div class="kpi-label">ELEVATED CARDIAC RISK</div>
+            <div class="kpi-value" id="stat-elevated-risk">0</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper kpi-green">🛡️</div>
+          <div class="kpi-details">
+            <div class="kpi-label">LOW RISK INDICATIONS</div>
+            <div class="kpi-value" id="stat-low-risk">0</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper kpi-teal">🎯</div>
+          <div class="kpi-details">
+            <div class="kpi-label">ENSEMBLE TEST ACCURACY</div>
+            <div class="kpi-value" id="stat-model-accuracy">88.5%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Activity Timeline Chart -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Prediction Activity (Past 7 Days)</h3>
+              <p class="card-subtitle">Volume of patient risk evaluations performed</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container-wrapper">
+              <canvas id="activity-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Provenance Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Ensemble Pipeline Status</h3>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem;">
+                <span class="text-muted">Ensemble Class:</span>
+                <strong>StackingClassifier</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem;">
+                <span class="text-muted">Base Classifiers:</span>
+                <span>LR, Random Forest, SVM</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem;">
+                <span class="text-muted">Meta-Learner:</span>
+                <span>Logistic Regression</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem;">
+                <span class="text-muted">Resampling:</span>
+                <span>SMOTE Evaluation</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--light-border); padding-bottom: 0.5rem;">
+                <span class="text-muted">Reduction:</span>
+                <span>PCA & SelectKBest</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-muted">Database:</span>
+                <span class="badge badge-success">MongoDB Connected</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <a href="model-performance.html" class="btn btn-outline btn-sm" style="width: 100%;">
+                Inspect Comprehensive Metrics &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recent Predictions Table -->
+      <div class="card" style="margin-top: 2rem;">
+        <div class="card-header">
+          <h3 class="card-title">Recent Predictions</h3>
+          <a href="history.html" class="btn btn-outline btn-sm">View All History</a>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="border: none; border-radius: 0;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Patient Profile & Vitals</th>
+                  <th>Outcome Label</th>
+                  <th>Risk Tier</th>
+                  <th>Estimated Probability</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recent-predictions-tbody">
+                <!-- Injected via dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="recent-empty-state" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📋</div>
+            <h3 class="empty-state-title">No Assessments Yet</h3>
+            <p class="empty-state-text">Start by evaluating a patient to generate risk scores.</p>
+            <a href="predict.html" class="btn btn-primary btn-sm">Create Prediction</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> For research and educational purposes only. Does not replace physician diagnosis.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict.</div>
+        <div><a href="index.html" style="color: #94a3b8;">Home</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Modules -->
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | CardioPredict</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+      <div class="nav-auth-actions" id="nav-auth-container">
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-icon-circle">🔐</div>
+        <h1>Welcome Back</h1>
+        <p>Sign in to your clinical research account.</p>
+      </div>
+
+      <div class="auth-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="email" class="form-control" placeholder="doctor@hospital.org" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            Sign In
+          </button>
+        </form>
+
+        <div class="auth-footer-links">
+          Don't have an account? <a href="register.html"><strong>Register here</strong></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initLoginForm, redirectIfAuthenticated } from './js/auth.js';
+    redirectIfAuthenticated();
+    initLoginForm('login-form');
+  </script>
+</body>
+</html>

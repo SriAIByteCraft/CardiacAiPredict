@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CardioPredict | AI-Powered Stacking Ensemble Heart Disease Prediction</title>
+  <meta name="description" content="State-of-the-art heart disease prediction web application using Stacking Ensemble Machine Learning with SMOTE class balancing and dimensionality reduction.">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link">History</a></li>
+        <li><a href="model-performance.html" class="nav-link">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container">
+        <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="main-content">
+    <section class="container" style="padding: 3rem 0 4rem;">
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;">
+        <div>
+          <span class="badge badge-primary" style="margin-bottom: 1rem;">Research & Educational Platform</span>
+          <h1 style="margin-bottom: 1.25rem;">Next-Generation Heart Disease Prediction with <span style="color: var(--primary);">Stacking Ensembles</span></h1>
+          <p style="font-size: 1.15rem; line-height: 1.7; margin-bottom: 2rem;">
+            Empowering clinical research and cardiovascular risk stratification through advanced machine learning. 
+            Combining Logistic Regression, Random Forest, and Support Vector Machines with rigorous SMOTE class balancing 
+            and PCA dimensionality reduction.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="predict.html" class="btn btn-primary btn-lg">Start Patient Evaluation &rarr;</a>
+            <a href="model-performance.html" class="btn btn-outline btn-lg">View Verified Benchmarks</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="border: 2px solid #e0f2fe; background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%); padding: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+              <span class="badge risk-low">Verified Architecture</span>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">UCI Cleveland Cohort</span>
+            </div>
+            <h3 style="margin-bottom: 0.75rem;">Model Benchmark Highlights</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+              Trained on standardized clinical indicators with 5-fold stratified cross-validation and held-out test evaluation.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="background: #ffffff; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">TEST ACCURACY</div>
+                <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary);">88.5%</div>
+              </div>
+              <div style="background: #ffffff; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">ROC-AUC SCORE</div>
+                <div style="font-size: 1.75rem; font-weight: 800; color: var(--secondary);">0.960</div>
+              </div>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+              <span>🛡️</span> Zero Data Leakage Pipeline Fitting
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Pillars Section -->
+    <section style="background-color: #ffffff; padding: 4.5rem 0; border-top: 1px solid var(--light-border); border-bottom: 1px solid var(--light-border);">
+      <div class="container">
+        <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
+          <span class="badge badge-secondary" style="margin-bottom: 0.75rem;">Clinical Data Science</span>
+          <h2>How Our Stacking Architecture Works</h2>
+          <p>Overcoming the limitations of isolated classifiers through heterogeneous base learners and meta-learning.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div class="card" style="padding: 2rem;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;">⚖️</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Class Balancing with SMOTE</h3>
+            <p>
+              Heart disease datasets frequently exhibit class imbalance. We evaluate synthetic oversampling (SMOTE) 
+              and random undersampling strictly inside training folds to prevent diagnostic bias.
+            </p>
+          </div>
+
+          <div class="card" style="padding: 2rem;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;">🔬</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Dimensionality Reduction</h3>
+            <p>
+              Comparing full 13-feature baselines with Principal Component Analysis (PCA) and ANOVA F-test SelectKBest 
+              feature selection to isolate the strongest cardiovascular risk predictors.
+            </p>
+          </div>
+
+          <div class="card" style="padding: 2rem;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;">🧬</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Stacking Ensemble Meta-Learner</h3>
+            <p>
+              Combining Logistic Regression (linear boundary), Random Forest (non-linear partitions), and SVM (high-margin RBF kernel) 
+              via out-of-fold cross-validated meta-estimation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clinical Features Overview -->
+    <section class="container" style="padding: 4.5rem 0;">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
+        <span class="badge badge-primary" style="margin-bottom: 0.75rem;">Dataset Schema</span>
+        <h2>13 Validated Medical Attributes</h2>
+        <p>Comprehensive evaluation incorporating resting hemodynamics, exercise stress indicators, fluoroscopy, and blood biochemistry.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Age & Biological Sex</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Demographic baseline for age-adjusted cardiovascular risk stratification.</p>
+        </div>
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Chest Pain Type (CP)</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Classified into Typical Angina, Atypical Angina, Non-Anginal, and Asymptomatic.</p>
+        </div>
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Blood Pressure & Chol</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Resting blood pressure in mm Hg and serum cholesterol in mg/dl on admission.</p>
+        </div>
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Exercise ECG & ST Slope</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Max achieved heart rate, exercise angina, ST depression (oldpeak), and slope.</p>
+        </div>
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Fluoroscopy Vessels</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Number of major vessels (0-3) colored during cardiac fluoroscopy.</p>
+        </div>
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-border);">
+          <div style="font-weight: 700; color: var(--primary);">Thalassemia Status</div>
+          <p style="font-size: 0.85rem; margin-bottom: 0; color: var(--text-muted);">Normal perfusion, fixed myocardial defect, or reversible ischemia defect.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> This web application is developed strictly for educational and scientific research purposes. 
+        It does NOT provide clinical medical diagnosis, patient advice, or treatment plans. Predictions are statistical machine learning estimates. 
+        Always consult a qualified, licensed healthcare provider for clinical cardiovascular evaluation.
+      </div>
+
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3><span>❤️</span> CardioPredict</h3>
+          <p>Full-Stack Heart Disease Prediction System with Stacking Ensemble ML, Class Balancing, and MongoDB Atlas.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About & Methodology</a></li>
+            <li><a href="predict.html">Run Prediction</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ML & Analytics</h4>
+          <ul>
+            <li><a href="model-performance.html">Model Performance</a></li>
+            <li><a href="history.html">Patient History</a></li>
+            <li><a href="api/model/metrics" target="_blank">Metrics JSON API</a></li>
+            <li><a href="api/health" target="_blank">System Health</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Compliance</h4>
+          <p style="font-size: 0.85rem; color: #94a3b8;">
+            Complies with secure cookie authentication, session isolation, and OWASP defensive security standards.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict Research Group. Released under MIT License.</div>
+        <div>Built with Python Flask, Scikit-Learn, PyMongo & Vanilla JS.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/ui.js"></script>
+</body>
+</html>

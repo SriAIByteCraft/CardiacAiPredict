@@ -1,0 +1,259 @@
+{
+  "model_name": "StackingClassifier (LR + RF + SVM -> Meta LR)",
+  "version": "1.0.0",
+  "trained_at": "2026-10-23T14:28:11.125897+00:00",
+  "dataset": "UCI Cleveland Heart Disease",
+  "sample_counts": {
+    "total": 303,
+    "train": 242,
+    "test": 61,
+    "disease_positive": 139,
+    "disease_negative": 164
+  },
+  "test_metrics": {
+    "accuracy": 0.8852,
+    "precision": 0.8387,
+    "recall": 0.9286,
+    "sensitivity": 0.9286,
+    "specificity": 0.8485,
+    "f1_score": 0.8814,
+    "confusion_matrix": {
+      "true_negatives": 28,
+      "false_positives": 5,
+      "false_negatives": 2,
+      "true_positives": 26,
+      "matrix": [
+        [
+          28,
+          5
+        ],
+        [
+          2,
+          26
+        ]
+      ]
+    },
+    "roc_auc": 0.96,
+    "brier_score": 0.0875,
+    "roc_curve": {
+      "fpr": [
+        0.0,
+        0.0,
+        0.0,
+        0.0303,
+        0.0303,
+        0.0909,
+        0.0909,
+        0.1212,
+        0.1212,
+        0.1818,
+        0.1818,
+        0.2727,
+        0.2727,
+        1.0
+      ],
+      "tpr": [
+        0.0,
+        0.0357,
+        0.5357,
+        0.5357,
+        0.75,
+        0.75,
+        0.8929,
+        0.8929,
+        0.9286,
+        0.9286,
+        0.9643,
+        0.9643,
+        1.0,
+        1.0
+      ]
+    },
+    "pr_curve": {
+      "precision": [
+        0.459,
+        0.4667,
+        0.4746,
+        0.4828,
+        0.4912,
+        0.5,
+        0.5091,
+        0.5185,
+        0.5283,
+        0.5385,
+        0.549,
+        0.56,
+        0.5714,
+        0.5833,
+        0.5957,
+        0.6087,
+        0.6222,
+        0.6364,
+        0.6512,
+        0.6667,
+        0.6829,
+        0.7,
+        0.7179,
+        0.7368,
+        0.7568,
+        0.75,
+        0.7714,
+        0.7941,
+        0.8182,
+        0.8125,
+        0.8387,
+        0.8667,
+        0.8621,
+        0.8929,
+        0.8889,
+        0.8846,
+        0.88,
+        0.875,
+        0.913,
+        0.9545,
+        0.9524,
+        0.95,
+        0.9474,
+        0.9444,
+        0.9412,
+        0.9375,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "recall": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.9643,
+        0.9643,
+        0.9643,
+        0.9643,
+        0.9286,
+        0.9286,
+        0.9286,
+        0.8929,
+        0.8929,
+        0.8571,
+        0.8214,
+        0.7857,
+        0.75,
+        0.75,
+        0.75,
+        0.7143,
+        0.6786,
+        0.6429,
+        0.6071,
+        0.5714,
+        0.5357,
+        0.5357,
+        0.5,
+        0.4643,
+        0.4286,
+        0.3929,
+        0.3571,
+        0.3214,
+        0.2857,
+        0.25,
+        0.2143,
+        0.1786,
+        0.1429,
+        0.1071,
+        0.0714,
+        0.0357,
+        0.0
+      ]
+    }
+  },
+  "explainability": {
+    "method": "Permutation Importance (held-out ROC-AUC drop)",
+    "top_features": [
+      {
+        "feature": "ca",
+        "importance_mean": 0.0429,
+        "importance_std": 0.0159
+      },
+      {
+        "feature": "cp",
+        "importance_mean": 0.037,
+        "importance_std": 0.0086
+      },
+      {
+        "feature": "oldpeak",
+        "importance_mean": 0.0141,
+        "importance_std": 0.0032
+      },
+      {
+        "feature": "exang",
+        "importance_mean": 0.0074,
+        "importance_std": 0.007
+      },
+      {
+        "feature": "slope",
+        "importance_mean": 0.0071,
+        "importance_std": 0.0124
+      },
+      {
+        "feature": "thalach",
+        "importance_mean": 0.0035,
+        "importance_std": 0.0086
+      },
+      {
+        "feature": "age",
+        "importance_mean": 0.003,
+        "importance_std": 0.0021
+      },
+      {
+        "feature": "thal",
+        "importance_mean": 0.0028,
+        "importance_std": 0.0073
+      },
+      {
+        "feature": "trestbps",
+        "importance_mean": 0.0015,
+        "importance_std": 0.0066
+      },
+      {
+        "feature": "sex",
+        "importance_mean": 0.0013,
+        "importance_std": 0.0058
+      }
+    ],
+    "disclaimer": "EDUCATIONAL AND RESEARCH USE ONLY: Feature contribution scores reflect statistical associations learned by the machine learning algorithm on the specific dataset sample. They do NOT establish medical causation, disease etiology, or individual clinical diagnosis. Never alter medications, lifestyle, or medical treatment based solely on these algorithmic scores."
+  }
+}

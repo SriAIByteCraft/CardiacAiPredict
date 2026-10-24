@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment History | CardioPredict</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link active">History</a></li>
+        <li><a href="model-performance.html" class="nav-link">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container"></div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" id="history-table-container">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1>Assessment History</h1>
+          <p class="text-muted" style="margin-bottom: 0;">Review your historical patient cardiovascular risk calculations.</p>
+        </div>
+        <div>
+          <a href="predict.html" class="btn btn-primary">
+            <span>+</span> Run New Assessment
+          </a>
+        </div>
+      </div>
+
+      <!-- Filters Row -->
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="btn btn-outline btn-sm risk-filter-btn active" data-risk="all">All Records</button>
+        <button class="btn btn-outline btn-sm risk-filter-btn" data-risk="Elevated">Elevated Risk</button>
+        <button class="btn btn-outline btn-sm risk-filter-btn" data-risk="Low">Low Risk</button>
+      </div>
+
+      <!-- History Table Card -->
+      <div class="card">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="border: none;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Patient Profile</th>
+                  <th>Diagnostic Outcome</th>
+                  <th>Risk Tier</th>
+                  <th>Estimated Probability</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <!-- Injected via history.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="history-empty-state" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📋</div>
+            <h3 class="empty-state-title">No Prediction Records Found</h3>
+            <p class="empty-state-text">You haven't generated any predictions under this filter criteria yet.</p>
+            <a href="predict.html" class="btn btn-primary btn-sm">Create New Prediction</a>
+          </div>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="card-footer" id="history-pagination" style="display: flex; justify-content: space-between; align-items: center;">
+          <button id="hist-prev-btn" class="btn btn-outline btn-sm" disabled>&larr; Previous</button>
+          <span id="page-indicator" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">Page 1 of 1</span>
+          <button id="hist-next-btn" class="btn btn-outline btn-sm" disabled>Next &rarr;</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="history-detail-modal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="card-title">Patient Clinical Assessment Record</h3>
+        <button class="modal-close" onclick="document.getElementById('history-detail-modal').classList.remove('show');">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-detail-content">
+        <!-- Injected via history.js -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="document.getElementById('history-detail-modal').classList.remove('show');">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> For research and educational purposes only. Does not replace physician diagnosis.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict.</div>
+        <div><a href="index.html" style="color: #94a3b8;">Home</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/history.js"></script>
+</body>
+</html>

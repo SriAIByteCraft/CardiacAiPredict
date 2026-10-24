@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Cardiovascular Assessment | CardioPredict</title>
+  <meta name="description" content="Enter 13 validated clinical cardiovascular attributes to calculate heart disease risk via the Stacking Ensemble model.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/predict.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link active">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link">History</a></li>
+        <li><a href="model-performance.html" class="nav-link">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container"></div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      
+      <div class="predict-header">
+        <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Clinical Evaluation Protocol</span>
+        <h1>Cardiovascular Patient Assessment</h1>
+        <p>Complete the 13 clinical attributes below. Inputs are pre-validated and normalized before execution through the fitted Stacking Ensemble pipeline.</p>
+      </div>
+
+      <div class="card predict-form-card">
+        <div class="card-body">
+          <form id="heart-prediction-form" novalidate>
+            
+            <!-- Section 1: Demographics -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <span class="form-section-badge">1</span>
+                Patient Demographics
+              </div>
+              <div class="form-grid-2">
+                <div class="form-group range-container">
+                  <div class="range-header">
+                    <label class="form-label" for="age">Patient Age <span class="unit-badge">18 - 100 yrs</span></label>
+                    <span id="age-badge" class="range-badge">55 yrs</span>
+                  </div>
+                  <input type="range" id="age" name="age" min="18" max="100" value="55" step="1">
+                  <small class="form-helper">Age in completed calendar years.</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sex">Biological Sex</label>
+                  <select id="sex" name="sex" class="form-select" required>
+                    <option value="1" selected>Male (1)</option>
+                    <option value="0">Female (0)</option>
+                  </select>
+                  <small class="form-helper">Biological sex as cataloged in dataset records.</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Resting Hemodynamics & Chemistry -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <span class="form-section-badge">2</span>
+                Resting Hemodynamics & Blood Chemistry
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="cp">Chest Pain Symptom Type (cp)</label>
+                  <select id="cp" name="cp" class="form-select" required>
+                    <option value="1">1: Typical Angina (Exertional retrosternal discomfort)</option>
+                    <option value="2">2: Atypical Angina (Non-classic symptoms)</option>
+                    <option value="3">3: Non-Anginal Pain (Non-cardiac chest pain)</option>
+                    <option value="4" selected>4: Asymptomatic (Silent / no chest pain reported)</option>
+                  </select>
+                </div>
+
+                <div class="form-group range-container">
+                  <div class="range-header">
+                    <label class="form-label" for="trestbps">Resting Blood Pressure <span class="unit-badge">mm Hg</span></label>
+                    <span id="trestbps-badge" class="range-badge">130 mmHg</span>
+                  </div>
+                  <input type="range" id="trestbps" name="trestbps" min="80" max="220" value="130" step="1">
+                  <small class="form-helper">Systolic arterial pressure at clinical admission.</small>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group range-container">
+                  <div class="range-header">
+                    <label class="form-label" for="chol">Serum Cholesterol (chol) <span class="unit-badge">mg/dl</span></label>
+                    <span id="chol-badge" class="range-badge">240 mg/dl</span>
+                  </div>
+                  <input type="range" id="chol" name="chol" min="100" max="550" value="240" step="1">
+                  <small class="form-helper">Total serum cholesterol level (desirable &lt; 200 mg/dl).</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fbs">Fasting Blood Sugar &gt; 120 mg/dl (fbs)</label>
+                  <select id="fbs" name="fbs" class="form-select" required>
+                    <option value="0" selected>0: False (&le; 120 mg/dl - Normoglycemia)</option>
+                    <option value="1">1: True (&gt; 120 mg/dl - Impaired / Diabetic fasting glucose)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="restecg">Resting Electrocardiogram (restecg)</label>
+                <select id="restecg" name="restecg" class="form-select" required>
+                  <option value="0" selected>0: Normal resting tracing</option>
+                  <option value="1">1: ST-T wave abnormality (T-wave inversion / &gt;0.05 mV deviation)</option>
+                  <option value="2">2: Probable or definite Left Ventricular Hypertrophy (Estes' criteria)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section 3: Cardiac Stress & Exercise Testing -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <span class="form-section-badge">3</span>
+                Exercise Stress & Electrocardiographic Response
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group range-container">
+                  <div class="range-header">
+                    <label class="form-label" for="thalach">Maximum Heart Rate (thalach) <span class="unit-badge">bpm</span></label>
+                    <span id="thalach-badge" class="range-badge">150 bpm</span>
+                  </div>
+                  <input type="range" id="thalach" name="thalach" min="70" max="220" value="150" step="1">
+                  <small class="form-helper">Peak heart rate reached during treadmill/cycle ergometry.</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="exang">Exercise-Induced Angina (exang)</label>
+                  <select id="exang" name="exang" class="form-select" required>
+                    <option value="0" selected>0: No angina during exercise</option>
+                    <option value="1">1: Yes, reproducible angina provoked by exertion</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group range-container">
+                  <div class="range-header">
+                    <label class="form-label" for="oldpeak">ST Depression (oldpeak) <span class="unit-badge">mm</span></label>
+                    <span id="oldpeak-badge" class="range-badge">1.0 mm</span>
+                  </div>
+                  <input type="range" id="oldpeak" name="oldpeak" min="0.0" max="6.2" value="1.0" step="0.1">
+                  <small class="form-helper">ST depression induced by exercise relative to rest.</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="slope">Slope of Peak ST Segment (slope)</label>
+                  <select id="slope" name="slope" class="form-select" required>
+                    <option value="1" selected>1: Upsloping (typically benign / normal response)</option>
+                    <option value="2">2: Flat (ischemic horizontal response)</option>
+                    <option value="3">3: Downsloping (strongly suggestive of severe ischemia)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Cardiac Fluoroscopy & Perfusion Scintigraphy -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <span class="form-section-badge">4</span>
+                Fluoroscopy & Myocardial Perfusion
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="ca">Major Vessels Colored by Fluoroscopy (ca)</label>
+                  <select id="ca" name="ca" class="form-select" required>
+                    <option value="0" selected>0 major vessels</option>
+                    <option value="1">1 major vessel</option>
+                    <option value="2">2 major vessels</option>
+                    <option value="3">3 major vessels</option>
+                  </select>
+                  <small class="form-helper">Count of vessels showing calcification or contrast narrowing.</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="thal">Thallium Scintigraphy Perfusion (thal)</label>
+                  <select id="thal" name="thal" class="form-select" required>
+                    <option value="3" selected>3: Normal myocardial perfusion</option>
+                    <option value="6">6: Fixed defect (prior infarction / scar tissue)</option>
+                    <option value="7">7: Reversible defect (inducible myocardial ischemia)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Educational Notice -->
+            <div class="form-educational-note">
+              <strong>Clinical Research Disclaimer:</strong> All inputs are processed by the locally trained 
+              Stacking Ensemble model. Results are statistical estimates for educational and exploratory analysis.
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="predict-actions">
+              <button type="reset" class="btn btn-outline">Reset Form</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="predict-submit-btn">
+                <span>⚡</span> Run Stacking Model Prediction
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> For research and educational purposes only. Does not replace physician diagnosis.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict.</div>
+        <div><a href="index.html" style="color: #94a3b8;">Home</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/predict.js"></script>
+</body>
+</html>

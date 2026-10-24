@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Performance & Benchmarks | CardioPredict</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/model-performance.css">
+</head>
+<body id="performance-view">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="heart-icon">❤️</span>
+        <span>Cardio<span class="highlight">Predict</span></span>
+      </a>
+
+      <button class="navbar-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
+        <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="history.html" class="nav-link">History</a></li>
+        <li><a href="model-performance.html" class="nav-link active">Model Performance</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="nav-auth-container"></div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      
+      <div class="performance-header">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Empirical Benchmark Registry</span>
+            <h1>Model Performance & Evaluation</h1>
+            <p class="text-muted" style="margin-bottom: 0;">
+              Computed strictly from the held-out test cohort (UCI Cleveland) and 5-fold stratified cross-validation. 
+              Zero fabricated metrics.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <div id="perf-model-version" style="font-weight: 700; color: var(--primary);">StackingClassifier</div>
+            <small class="text-muted">Trained: <span id="perf-trained-at">Oct 2026</span></small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Metrics Scoreboard Grid -->
+      <div class="metrics-scoreboard">
+        <div class="metric-card">
+          <div class="metric-label">Accuracy</div>
+          <div class="metric-value" id="score-accuracy">88.5%</div>
+          <div class="metric-subtext">Overall correct rate</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Precision</div>
+          <div class="metric-value" id="score-precision">83.9%</div>
+          <div class="metric-subtext">Positive predictive value</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Sensitivity / Recall</div>
+          <div class="metric-value" id="score-recall" style="color: var(--secondary);">92.9%</div>
+          <div class="metric-subtext">True positive rate</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Specificity</div>
+          <div class="metric-value" id="score-specificity">84.8%</div>
+          <div class="metric-subtext">True negative rate</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">F1-Score</div>
+          <div class="metric-value" id="score-f1">88.1%</div>
+          <div class="metric-subtext">Harmonic mean precision-recall</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">ROC-AUC</div>
+          <div class="metric-value" id="score-roc-auc" style="color: var(--primary);">0.960</div>
+          <div class="metric-subtext">Discriminative power</div>
+        </div>
+      </div>
+
+      <!-- Confusion Matrix & ROC Curve Row -->
+      <div class="charts-grid-2">
+        
+        <!-- Confusion Matrix Visualizer -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Test Cohort Confusion Matrix</h3>
+            <span class="badge badge-secondary">n = 61 Test Samples</span>
+          </div>
+          <div class="card-body cm-grid-wrapper">
+            <div class="cm-container">
+              <div></div>
+              <div class="cm-header">PRED: NO (0)</div>
+              <div class="cm-header">PRED: YES (1)</div>
+
+              <div class="cm-header">ACTUAL: NO (0)</div>
+              <div class="cm-cell cm-tn">
+                <span class="cm-cell-count" id="cm-tn">28</span>
+                <span class="cm-cell-tag">True Negative</span>
+              </div>
+              <div class="cm-cell cm-fp">
+                <span class="cm-cell-count" id="cm-fp">5</span>
+                <span class="cm-cell-tag">False Positive</span>
+              </div>
+
+              <div class="cm-header">ACTUAL: YES (1)</div>
+              <div class="cm-cell cm-fn">
+                <span class="cm-cell-count" id="cm-fn">2</span>
+                <span class="cm-cell-tag">False Negative</span>
+              </div>
+              <div class="cm-cell cm-tp">
+                <span class="cm-cell-count" id="cm-tp">26</span>
+                <span class="cm-cell-tag">True Positive</span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1.25rem; text-align: center;">
+              High clinical sensitivity ensures low False Negatives (2 FN out of 28 true disease patients).
+            </div>
+          </div>
+        </div>
+
+        <!-- ROC Curve Chart -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Receiver Operating Characteristic (ROC)</h3>
+            <span class="badge badge-primary">AUC = 0.960</span>
+          </div>
+          <div class="card-body chart-card-body">
+            <canvas id="roc-curve-chart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comparative Experiments Section -->
+      <h2 style="margin: 2.5rem 0 1.25rem; font-size: 1.6rem;">Empirical Comparisons & Ablations (5-Fold Stratified CV)</h2>
+
+      <div class="charts-grid-2">
+        
+        <!-- 1. Individual Classifiers Comparison -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Classifiers Comparison: Base vs Stacking</h3>
+            <span class="badge badge-primary">Accuracy & F1</span>
+          </div>
+          <div class="card-body chart-card-body">
+            <canvas id="models-comparison-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- 2. Balancing Techniques Comparison -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Class Balancing Techniques</h3>
+            <span class="badge badge-warning">Recall & ROC-AUC</span>
+          </div>
+          <div class="card-body chart-card-body">
+            <canvas id="balancing-comparison-chart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="charts-grid-2">
+        
+        <!-- 3. Dimensionality Reduction Comparison -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Dimensionality Reduction: Full vs PCA vs SelectKBest</h3>
+            <span class="badge badge-secondary">Accuracy & ROC-AUC</span>
+          </div>
+          <div class="card-body chart-card-body">
+            <canvas id="reduction-comparison-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- 4. Feature Importance Ranking -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Permutation Feature Importance</h3>
+            <span class="badge badge-primary">Mean AUC Drop</span>
+          </div>
+          <div class="card-body">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              Features causing the greatest drop in discriminative power when randomly shuffled across validation folds.
+            </p>
+            <div id="feature-importance-list">
+              <!-- Injected via model-performance.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-disclaimer-box">
+        <strong>⚠️ MEDICAL DISCLAIMER:</strong> For research and educational purposes only. Does not replace physician diagnosis.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 CardioPredict.</div>
+        <div><a href="index.html" style="color: #94a3b8;">Home</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/model-performance.js"></script>
+</body>
+</html>
