@@ -1,0 +1,35 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "functions": {
+    "backend/app.py": {
+      "includeFiles": "frontend/**, backend/ml/artifacts/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
+    },
+    {
+      "source": "/css/(.*)",
+      "destination": "/frontend/css/$1"
+    },
+    {
+      "source": "/js/(.*)",
+      "destination": "/frontend/js/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/frontend/assets/$1"
+    },
+    {
+      "source": "/(about|dashboard|history|login|model-performance|predict|profile|register|result|404)",
+      "destination": "/frontend/$1.html"
+    },
+    {
+      "source": "/(.*\\.html)",
+      "destination": "/frontend/$1"
+    }
+  ]
+}

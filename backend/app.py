@@ -27,7 +27,18 @@ def create_app(config_name=None):
     """
     Flask Application Factory.
     """
-    app = Flask(__name__, static_folder="../frontend", static_url_path="")
+    # Resolve frontend directory across local development and Vercel Serverless runtimes
+    frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
+    if not os.path.exists(frontend_dir):
+        alt_root = os.path.abspath(os.path.join(os.getcwd(), "frontend"))
+        if os.path.exists(alt_root):
+            frontend_dir = alt_root
+        else:
+            alt_nested = os.path.abspath(os.path.join(os.path.dirname(__file__), "frontend"))
+            if os.path.exists(alt_nested):
+                frontend_dir = alt_nested
+
+    app = Flask(__name__, static_folder=frontend_dir, static_url_path="")
 
     # Load configuration
     if config_name and config_name in config_by_name:
@@ -91,7 +102,6 @@ def create_app(config_name=None):
         )
 
     # Frontend serving helper routes for full convenience
-    frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
 
     @app.route("/")
     def index():

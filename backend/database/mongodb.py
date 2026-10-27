@@ -20,7 +20,7 @@ def init_db(app):
     
     uri = app.config.get("MONGODB_URI", "").strip()
     db_name = app.config.get("MONGODB_DB_NAME", "heart_disease_db")
-    timeout_ms = app.config.get("MONGODB_CONNECT_TIMEOUT_MS", 45000)
+    timeout_ms = app.config.get("MONGODB_CONNECT_TIMEOUT_MS", 5000)
 
     if not uri or app.config.get("TESTING", False):
         logger.info("[Database] No MONGODB_URI provided or in TESTING mode. Initializing mongomock fallback.")
@@ -66,7 +66,7 @@ def get_db():
         db_name = os.getenv("MONGODB_DB_NAME", "heart_disease_db")
         if uri:
             try:
-                timeout_ms = int(os.getenv("MONGODB_CONNECT_TIMEOUT_MS", 45000))
+                timeout_ms = int(os.getenv("MONGODB_CONNECT_TIMEOUT_MS", 5000))
                 client = MongoClient(
                     uri,
                     serverSelectionTimeoutMS=timeout_ms,
