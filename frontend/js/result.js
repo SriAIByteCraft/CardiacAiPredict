@@ -53,6 +53,16 @@ function renderResult(data) {
   const prob = typeof data.probability === 'number' ? data.probability : (isDisease ? 0.85 : 0.15);
   const probPercent = (prob * 100).toFixed(1);
 
+  // Patient Profile Details
+  const nameEl = document.getElementById('patient-name-display');
+  if (nameEl) nameEl.textContent = data.patient_name || 'Anonymous Patient';
+
+  const phoneEl = document.getElementById('patient-phone-display');
+  if (phoneEl) phoneEl.textContent = data.patient_phone || 'Not Provided';
+
+  const addrEl = document.getElementById('patient-address-display');
+  if (addrEl) addrEl.textContent = data.patient_address || 'Not Provided';
+
   // Result Banner & Badges
   const badgeEl = document.getElementById('result-risk-badge');
   if (badgeEl) {

@@ -26,7 +26,6 @@
 
       <ul class="navbar-nav">
         <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About & Methodology</a></li>
         <li><a href="predict.html" class="nav-link">Run Assessment</a></li>
         <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
         <li><a href="history.html" class="nav-link">History</a></li>
@@ -49,6 +48,30 @@
         </div>
         <div>
           <span id="result-risk-badge" class="badge risk-low" style="font-size: 0.95rem; padding: 0.5rem 1rem;">Analyzing...</span>
+        </div>
+      </div>
+
+      <!-- Patient Information Card -->
+      <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 class="card-title" style="font-size: 1.1rem;">👤 Patient Information</h3>
+          <span class="badge badge-secondary" style="font-size: 0.75rem;">Medical Profile</span>
+        </div>
+        <div class="card-body">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+            <div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Patient Full Name</div>
+              <div id="patient-name-display" style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-top: 0.25rem;">—</div>
+            </div>
+            <div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Phone Number</div>
+              <div id="patient-phone-display" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-top: 0.25rem;">—</div>
+            </div>
+            <div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Residential Address</div>
+              <div id="patient-address-display" style="font-size: 1rem; font-weight: 500; color: var(--text-primary); margin-top: 0.25rem;">—</div>
+            </div>
+          </div>
         </div>
       </div>
 

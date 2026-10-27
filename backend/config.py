@@ -7,7 +7,11 @@ from datetime import timedelta
 from dotenv import load_dotenv
 
 # Load .env if present
-load_dotenv()
+_env_file = os.path.join(os.path.dirname(__file__), ".env")
+if os.path.exists(_env_file):
+    load_dotenv(_env_file)
+else:
+    load_dotenv()
 
 class Config:
     """Base configuration settings."""
@@ -26,7 +30,7 @@ class Config:
     # MongoDB Atlas
     MONGODB_URI = os.getenv("MONGODB_URI", "")
     MONGODB_DB_NAME = os.getenv("MONGODB_DB_NAME", "heart_disease_db")
-    MONGODB_CONNECT_TIMEOUT_MS = int(os.getenv("MONGODB_CONNECT_TIMEOUT_MS", 5000))
+    MONGODB_CONNECT_TIMEOUT_MS = int(os.getenv("MONGODB_CONNECT_TIMEOUT_MS", 45000))
 
     # Machine Learning Artifacts
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))

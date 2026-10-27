@@ -70,11 +70,19 @@ async function loadRecentPredictions() {
       tdDate.textContent = formatDateTime(item.created_at);
       tr.appendChild(tdDate);
 
-      // Patient Vitals Summary (Age / Sex / BP / Chol)
+      // Patient Identity & Vitals Summary
       const tdVitals = document.createElement('td');
       const feats = item.validated_features || {};
       const sexLabel = feats.sex === 1 ? 'Male' : 'Female';
-      tdVitals.textContent = `${feats.age || 'N/A'} yrs, ${sexLabel} | BP: ${feats.trestbps || 'N/A'} mmHg`;
+      const pName = document.createElement('div');
+      pName.style.fontWeight = '700';
+      pName.textContent = item.patient_name || 'Anonymous Patient';
+      const pMeta = document.createElement('div');
+      pMeta.className = 'text-muted';
+      pMeta.style.fontSize = '0.78rem';
+      pMeta.textContent = `${feats.age || 'N/A'} yrs, ${sexLabel} | BP: ${feats.trestbps || 'N/A'} mmHg`;
+      tdVitals.appendChild(pName);
+      tdVitals.appendChild(pMeta);
       tr.appendChild(tdVitals);
 
       // Prediction Label

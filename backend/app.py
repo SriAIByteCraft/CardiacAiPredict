@@ -9,6 +9,7 @@ try:
     from .extensions import cors
     from .database.mongodb import init_db
     from .database.indexes import create_database_indexes
+    from .database.seed import seed_demo_data
     from .routes import register_blueprints
     from .middleware.security import add_security_headers
     from .utils.responses import error_response
@@ -17,6 +18,7 @@ except ImportError:
     from extensions import cors
     from database.mongodb import init_db
     from database.indexes import create_database_indexes
+    from database.seed import seed_demo_data
     from routes import register_blueprints
     from middleware.security import add_security_headers
     from utils.responses import error_response
@@ -41,11 +43,12 @@ def create_app(config_name=None):
         resources={r"/api/*": {"origins": cors_origin}}
     )
 
-    # Initialize Database & Indexes
+    # Initialize Database, Indexes & Seed Demo Data
     with app.app_context():
         try:
             db = init_db(app)
             create_database_indexes(db)
+            seed_demo_data(db)
         except Exception as e:
             app.logger.warning(f"Database initialization deferred or errored: {e}")
 
@@ -110,4 +113,5 @@ app = create_app()
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=app.config.get("DEBUG", True))
+    app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
+

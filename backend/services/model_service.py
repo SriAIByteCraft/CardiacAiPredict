@@ -13,16 +13,26 @@ class ModelService:
 
     @staticmethod
     def _get_metrics_file_path():
-        if current_app:
-            return current_app.config.get("METRICS_ARTIFACT_PATH")
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        path = current_app.config.get("METRICS_ARTIFACT_PATH") if current_app else None
+        if path and os.path.exists(path):
+            return path
+        if path and not os.path.isabs(path):
+            cand = os.path.join(base_dir, path)
+            if os.path.exists(cand):
+                return cand
         return os.path.join(base_dir, "ml", "artifacts", "model_metrics.json")
 
     @staticmethod
     def _get_comparison_file_path():
-        if current_app:
-            return current_app.config.get("COMPARISON_ARTIFACT_PATH")
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        path = current_app.config.get("COMPARISON_ARTIFACT_PATH") if current_app else None
+        if path and os.path.exists(path):
+            return path
+        if path and not os.path.isabs(path):
+            cand = os.path.join(base_dir, path)
+            if os.path.exists(cand):
+                return cand
         return os.path.join(base_dir, "ml", "artifacts", "model_comparison.json")
 
     @staticmethod

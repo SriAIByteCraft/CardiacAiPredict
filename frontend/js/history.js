@@ -55,7 +55,7 @@ async function loadHistory() {
   const paginationControls = document.getElementById('history-pagination');
   if (!tbody) return;
 
-  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 2rem;"><span class="spinner spinner-primary"></span> Loading records...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 2rem;"><span class="spinner spinner-primary"></span> Loading records...</td></tr>';
 
   try {
     const res = await historyAPI.getAll({ page: currentPage, per_page: 8, risk: currentRisk });
@@ -79,6 +79,19 @@ async function loadHistory() {
       const tdDate = document.createElement('td');
       tdDate.textContent = formatDateTime(item.created_at);
       tr.appendChild(tdDate);
+
+      // Patient Name & Contact
+      const tdPatient = document.createElement('td');
+      const pName = document.createElement('div');
+      pName.style.fontWeight = '700';
+      pName.textContent = item.patient_name || 'Anonymous Patient';
+      const pPhone = document.createElement('div');
+      pPhone.className = 'text-muted';
+      pPhone.style.fontSize = '0.78rem';
+      pPhone.textContent = item.patient_phone ? `📞 ${item.patient_phone}` : 'No phone';
+      tdPatient.appendChild(pName);
+      tdPatient.appendChild(pPhone);
+      tr.appendChild(tdPatient);
 
       // Patient Vitals
       const tdVitals = document.createElement('td');
@@ -157,6 +170,16 @@ function showDetailModal(item) {
       <h3 style="margin-top: 0.5rem;">${item.prediction_label}</h3>
       <p class="text-muted" style="margin-bottom: 0;">Analyzed on: ${formatDateTime(item.created_at)}</p>
       <p class="text-muted">Estimated Disease Probability: <strong>${typeof item.probability === 'number' ? (item.probability * 100).toFixed(1) + '%' : 'N/A'}</strong></p>
+    </div>
+
+    <!-- Patient Demographics & Contact Details -->
+    <div style="background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.2); padding: 0.85rem 1rem; border-radius: 8px; margin-bottom: 1.25rem;">
+      <h4 style="margin: 0 0 0.5rem 0; font-size: 0.92rem; color: var(--primary);">👤 Patient Demographics & Contact</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+        <div><strong>Patient Name:</strong> ${item.patient_name || 'Anonymous Patient'}</div>
+        <div><strong>Contact Phone:</strong> ${item.patient_phone || 'Not Provided'}</div>
+        <div style="grid-column: span 2;"><strong>Residential Address:</strong> ${item.patient_address || 'Not Provided'}</div>
+      </div>
     </div>
     <div class="table-wrapper">
       <table class="table">

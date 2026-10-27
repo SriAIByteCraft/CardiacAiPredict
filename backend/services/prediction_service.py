@@ -53,10 +53,17 @@ class PredictionService:
         db = get_db()
         user_id = str(user_dict["_id"])
         
+        patient_info = {
+            "patient_name": str(input_payload.get("patient_name", "")).strip() or "Unnamed Patient",
+            "patient_phone": str(input_payload.get("patient_phone", "")).strip(),
+            "patient_address": str(input_payload.get("patient_address", "")).strip()
+        }
+
         pred_doc = Prediction.create_document(
             user_id=user_id,
             validated_features=prediction_result["validated_features"],
-            prediction_result=prediction_result
+            prediction_result=prediction_result,
+            patient_info=patient_info
         )
 
         try:
@@ -69,6 +76,9 @@ class PredictionService:
 
         response_data = {
             "id": saved_id,
+            "patient_name": patient_info["patient_name"],
+            "patient_phone": patient_info["patient_phone"],
+            "patient_address": patient_info["patient_address"],
             "prediction": prediction_result["prediction"],
             "prediction_label": prediction_result["prediction_label"],
             "probability": prediction_result.get("probability"),

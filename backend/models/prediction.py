@@ -9,10 +9,14 @@ class Prediction:
     """Represents a saved patient prediction record."""
 
     @staticmethod
-    def create_document(user_id, validated_features: dict, prediction_result: dict) -> dict:
+    def create_document(user_id, validated_features: dict, prediction_result: dict, patient_info: dict = None) -> dict:
         """Constructs a MongoDB prediction document."""
+        patient_info = patient_info or {}
         return {
             "user_id": str(user_id),
+            "patient_name": str(patient_info.get("patient_name", "")).strip() or "Unnamed Patient",
+            "patient_phone": str(patient_info.get("patient_phone", "")).strip(),
+            "patient_address": str(patient_info.get("patient_address", "")).strip(),
             "validated_features": validated_features,
             "prediction": prediction_result["prediction"],
             "prediction_label": prediction_result["prediction_label"],
@@ -35,6 +39,9 @@ class Prediction:
         return {
             "id": pred_id,
             "user_id": str(doc.get("user_id")),
+            "patient_name": doc.get("patient_name", "Unnamed Patient"),
+            "patient_phone": doc.get("patient_phone", ""),
+            "patient_address": doc.get("patient_address", ""),
             "validated_features": doc.get("validated_features", {}),
             "prediction": doc.get("prediction"),
             "prediction_label": doc.get("prediction_label"),
@@ -44,3 +51,4 @@ class Prediction:
             "model_version": doc.get("model_version"),
             "created_at": created_at.isoformat() if isinstance(created_at, datetime) else str(created_at)
         }
+
